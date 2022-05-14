@@ -3,6 +3,9 @@ const app = express();
 const bodyParser = require('body-parser');
 const connection = require('./database/connection');
 
+const categoriesController = require('./categories/CategoriesController');
+const articlesContoller = require('./articles/ArticlesController')
+
 // View Engine
 app.set('view engine', 'ejs');
 
@@ -16,6 +19,10 @@ app.use(bodyParser.json());
 app.get('/', (req, res) =>{
     res.render('index');
 })
+
+// Routers
+app.use('/',categoriesController);
+app.use('/',articlesContoller);
 
 // database MYSQL
 connection
