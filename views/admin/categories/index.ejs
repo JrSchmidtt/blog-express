@@ -4,7 +4,10 @@
     <div class="container">
         <div class="card center text-center">
             <div class="card-header">
-                <h2>Categories</h2>
+                <h2>Categories</h2><br>
+                <div class="text-left">
+                    <a name="" id="" class="pull-right btn btn-success" href="/admin/categories/new" role="button">Criar Nova Categoria</a>
+                </div>
                 <hr>
                 <table class="table table-bordered">
                     <thead>
@@ -19,9 +22,15 @@
                         <% categories.forEach(category => { %>
                             <tr>
                                 <th><%= category.id %></th>
-                                <th><%= category.slug %></th>
-                                <th><%= category.slug %></th>
-                                <th></th>
+                                <th> <%= category.slug %></th>
+                                <th> <%= category.slug %></th>
+                                <th>
+                                    <a name="" id="" class="btn btn-warning" href="#" role="button">Editar</a>
+                                    <form method="post" action="/categories/delete" style="display: inline;" onsubmit="confirmarDelecao(event, this)">
+                                        <input type="hidden" name="id" value="<%= category.id %>">
+                                        <button name="" id="" class="btn btn-danger" href="#" role="button">Deletar</button>
+                                    </form>
+                                </th>
                             </tr>
                         <% }) %>
                     </tbody>
@@ -33,3 +42,14 @@
     </div>
 </body> 
 <%- include ('../../partials/footer.ejs'); %>
+<script>
+    function confirmarDelecao(event, form){
+        event.preventDefault();
+        var decision = confirm('Você quer DELETAR essa categoria ?');
+        if(decision){
+            form.submit();
+        }else{
+            console.log('Não, MissClick');
+        }
+    }
+</script>
