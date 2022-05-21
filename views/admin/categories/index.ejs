@@ -4,7 +4,7 @@
     <div class="container">
         <div class="card center text-center">
             <div class="card-header">
-                <h2>Categories</h2><br>
+                <h2>Cetegorias</h2><br>
                 <div class="text-left">
                     <a name="" id="" class="pull-right btn btn-success" href="/admin/categories/new" role="button">Criar Nova Categoria</a>
                 </div>
@@ -13,19 +13,19 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Title</th>
+                            <th>Titulo</th>
                             <th>Slug</th>
-                            <th>Action</th>
+                            <th>Ação</th>
                         </tr>
                     </thead>
                     <tbody>
                         <% categories.forEach(category => { %>
                             <tr>
                                 <th><%= category.id %></th>
-                                <th> <%= category.slug %></th>
+                                <th> <%= category.title %></th>
                                 <th> <%= category.slug %></th>
                                 <th>
-                                    <a name="" id="" class="btn btn-warning" href="#" role="button">Editar</a>
+                                    <a name="" id="" class="btn btn-warning" href="/admin/categories/edit/<%= category.id %>" role="button">Editar</a>
                                     <form method="post" action="/categories/delete" style="display: inline;" onsubmit="confirmarDelecao(event, this)">
                                         <input type="hidden" name="id" value="<%= category.id %>">
                                         <button name="" id="" class="btn btn-danger" href="#" role="button">Deletar</button>
