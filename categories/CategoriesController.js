@@ -18,11 +18,11 @@ router.post('/admin/categories/save', (req, res) => {
             title: title,
             slug: slugify(title)
         }).then(() =>{
-            res.redirect('/admin/categories/new');
+            res.redirect('/admin/categories');
         })
         
     }else{
-        res.redirect('/admin/categories/new');
+        res.redirect('/admin/categories');
     }
 });
 
