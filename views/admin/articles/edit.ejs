@@ -4,16 +4,21 @@
     <div class="container">
         <div class="card center text-center">
             <div class="card-header">
-                <h2>Nova Postagem</h2>
+                <h2>Editar Artigo</h2>
             </div>
             <div class="card-body">
-                <form method="POST" action="/articles/save">
-                    <input class="form-control" type="text" name="title" id="" placeholder="Defina o título da Postagem"><br>
-                    <textarea class="form-control" name="body" placeholder="Texto da postagem aqui.." id="article" cols="30" rows="10"></textarea><br>
+                <form method="POST" action="/articles/update">
+                    <input class="form-control" type="text" name="title" id="" placeholder="Defina o título da Postagem" value="<%= article.title %>" ><br>
+                    <textarea class="form-control" name="body" placeholder="" id="article" cols="30" rows="10"></textarea>
+                    <input type="hidden" name="id" value="<%= article.id %>">
                     <label>Categoria</label><br>
                     <select name="category" class="form-control">
                         <% categories.forEach((category) => { %>
-                            <option value="<%= category.id %>" ><%= category.title %></option>
+                            <% if (category.id == article.categoryId) { %>
+                                <option value="<%= category.id %>" selected><%= category.title %></option>
+                            <% }else { %>
+                                <option value="<%= category.id %>" ><%= category.title %></option>
+                            <% } %> 
                        <% }); %>
                     </select><br>
                     <button class="form-control btn btn-success">Postar</button>
@@ -21,9 +26,12 @@
             </div>
         </div>
     </div>
+    <div id="content" style="display: none;">
+        <%= article.body %>
+    </div>
+
 </body> 
 <%- include ('../../partials/footer.ejs'); %>
-
 <script src="/tinymce/tinymce.min.js"></script>
 <script>
 tinymce.init({
@@ -43,6 +51,9 @@ tinymce.init({
                     'save',
                     'table',
                     'emoticons',
-                ]
+                ],
+                init_instance_callback:() =>{
+                    tinymce.get('article').setContent($('#content').html())
+                }
             })
 </script>
