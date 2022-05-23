@@ -1,8 +1,8 @@
 <%- include ('./partials/header.ejs'); %>
 <%- include ('./partials/homenavbar.ejs'); %>
 <body>
-    <div class="container">
-        <% articles.forEach(article => { %>
+    <div class="container"><br>
+        <% result.articles.rows.forEach(article => { %>
             <div class="row">
               <div class="col-xs">
                 <div class="card">
@@ -16,7 +16,14 @@
         <% }) %>
         <div class="row" >
           <div class="col col-xs">
-            <a style="float:right" name="" id="" class="btn btn-success" href="/page/2" role="button">Next></a>
+            <% if (result.page > 2) { %>
+              <a style="float:left" name="" id="" class="btn btn-success" href="/page/<%= result.page - 1 %>" role="button">< Prev</a>
+              <% } else if(result.page == 2) {%> 
+                <a style="float:left" name="" id="" class="btn btn-success" href="/" role="button">< Prev</a>
+              <% }%>
+            <% if (result.next) { %>
+              <a style="float:right" name="" id="" class="btn btn-success" href="/page/<%= result.page + 1 %>" role="button">Next></a>
+            <% } %> 
           </div>
         </div>
     </div>
