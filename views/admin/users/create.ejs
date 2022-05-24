@@ -1,0 +1,23 @@
+<%- include ('../../partials/header.ejs'); %>
+<%- include ('../../partials/navbar.ejs'); %>
+<body>
+    <div class="container">
+        <div class="card center text-center">
+            <div class="card-header">
+                <h2>Criar Conta de Usuário</h2>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="/users/create">
+                    <div class="mb-3">
+                      <label for="" class="form-label"></label>
+                      <input type="email" class="form-control" name="email" id="" aria-describedby="emailHelpId" placeholder="email@server.com">
+                      <input type="password" class="form-control" name="password" id="" placeholder="*******">
+                      <small id="emailHelpId" class="form-text text-muted">Coloque o email e senha do usuario corretamente.</small>
+                    </div>
+                    <button class="form-control btn btn-success">Criar Conta</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body> 
+<%- include ('../../partials/footer.ejs'); %>
