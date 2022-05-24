@@ -2,12 +2,10 @@ const express = require('express');
 const router = express.Router();
 const Category = require('./Category');
 const slugify = require('slugify');
+const adminAuth = require('../middlewares/adminAuth');
 
-router.get('/categories', (req, res) => {
-    res.send('ROTA DE CATEGORIAS');
-});
 
-router.get('/admin/categories/new', (req, res) => {
+router.get('/admin/categories/new', adminAuth,(req, res) => {
     res.render('admin/categories/new');
 });
 
@@ -26,7 +24,7 @@ router.post('/admin/categories/save', adminAuth,(req, res) => {
     }
 });
 
-router.get('/admin/categories', (req, res) => {
+router.get('/admin/categories', adminAuth,(req, res) => {
     Category.findAll().then(categories => {
         res.render('admin/categories/index', {categories : categories});
     });
@@ -69,7 +67,7 @@ router.get('/admin/categories/edit/:id', adminAuth,(req, res) =>{
     })
 });
 
-router.post('/categories/update', (req, res,) =>{
+router.post('/categories/update', adminAuth,(req, res,) =>{
     var id = req.body.id;
     var title = req.body.title;
 
@@ -81,4 +79,10 @@ router.post('/categories/update', (req, res,) =>{
         res.redirect('/admin/categories');
     })
 });
+
+router.get('/logout', (req, res) =>{
+    req.session.user = undefined;
+    res.redirect('/');
+})
+
 module.exports = router;
